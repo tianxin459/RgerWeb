@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+        crossorigin="anonymous"></script>
+    <style>
+        div.flipper-container{
+            border: 2px solid gray;
+        }
+        div.flipper {
+            width: 10vw;
+            height: 10vw;
+            display: flex;
+            border: 1px solid gold;
+            transition: linear;
+            transition-duration: 0.2s;
+            transform-style: preserve-3d;
+            perspective: 500px;
+            background-color: black
+        }
+
+        div.flip{
+            transform: rotateY(180deg);
+        }
+
+        .flipper>div {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            margin: 0 auto;
+            background-color: black;
+            color: white;
+        }
+
+        div.front {
+            transform: rotateX(0deg);
+            backface-visibility: hidden;
+        }
+
+        div.back {
+            transform: rotateY(180deg);
+            background-color: ghostwhite;
+            color: black;
+            backface-visibility: hidden;
+        }
+
+        
+        #btnFlip3:visited,
+        #btnFlip3:active{
+            transition: linear;
+            transition-duration: 0.2s;
+            transform: rotateZ(180deg);
+        }
+
+
+        .Clickable{
+            border: 1px solid;
+        }
+
+        .Clickable:active{
+            background-color: red;
+        }
+
+        .Clickable .lblTxt{
+            position: absolute;
+        }
+        
+        .Clickable .Txt{
+            width: 100px;
+        }
+        
+    </style>
+
+    <style>
+            .onclick-menu {
+                position: relative;
+                display: inline-block;
+            }
+            .onclick-menu:before {
+                content: "click me!";
+            }
+            .onclick-menu:focus .onclick-menu-content {
+                display: block;
+            }
+            .onclick-menu-content {
+                position: absolute;
+                z-index: 1;
+            
+                display: none;
+            }
+    </style>
+</head>
+
+<body>
+    <div class="flipper-container">
+        <div class="flipper">
+            <div class="front">
+                <H1>Front</H1>
+            </div>
+            <div class="back">
+                <H1>back</H1>
+            </div>
+        </div>
+        <div>
+            <button id="btnFlip">Flip</button>
+            <img id="btnFlip3" src="img/icon/settings.png" alt="" srcset="">
+        </div>
+    </div>
+
+    <div class="Clickable">
+        <label class="lblTxt" for="">Text</label>
+        <input class="txt" type="text">
+    </div>
+    <div tabindex="0" class="onclick-menu">
+            <ul class="onclick-menu-content">
+                <li><button onclick="alert('click 1')">Look, mom</button></li>
+                <li><button onclick="alert('click 2')">no JavaScript!</button></li>
+                <li><button onclick="alert('click 3')">Pretty nice, right?</button></li>
+            </ul>
+        </div>
+</body>
+
+</html>
+<script>
+    let flip=false;
+    $(document).ready(() => {
+        console.log('go');
+
+        $("div.flip>div").click(e => {
+            console.log('click');
+        })
+        $("#btnFlip").click(e => {
+            console.log('flip');
+            flip=!flip;
+            if(flip)
+            {
+                $(".flipper").addClass("flip");
+            }
+            else{
+                $(".flipper").removeClass("flip");
+            }
+        });
+
+        $("#btnFlip3").click(e => {
+            flip=!flip;
+            if(flip)
+            {
+                $(".flipper").addClass("flip");
+            }
+            else{
+                $(".flipper").removeClass("flip");
+            }
+        });
+    });
+</script>
